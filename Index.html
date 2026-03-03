@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Email Portal</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 500px; margin: auto; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, textarea { width: 100%; padding: 8px; box-sizing: border-box; }
+        button { background-color: lightblue; padding: 10px 15px; border: none; font-weight: bold; cursor: pointer; }
+        .message { padding: 10px; margin-bottom: 15px; border-radius: 5px; }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+
+    <h2>Send an Email</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="message {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+        <div class="form-group">
+            <label>Display Name:</label>
+            <input type="text" name="display_name" required>
+        </div>
+        <div class="form-group">
+            <label>Recipient Email Address:</label>
+            <input type="email" name="recipient_email" required>
+        </div>
+        <div class="form-group">
+            <label>Subject:</label>
+            <input type="text" name="subject" required>
+        </div>
+        <div class="form-group">
+            <label>Body:</label>
+            <textarea name="body" rows="6" required></textarea>
+        </div>
+        <button type="submit">Send Email</button>
+    </form>
+
+</body>
+</html>
